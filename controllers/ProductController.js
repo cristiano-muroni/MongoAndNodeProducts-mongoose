@@ -24,11 +24,11 @@ module.exports = class ProductController {
         res.redirect('/products');
     };
 
-    //static async getProduct(req, res) {
-        //const id = req.params.id;
-        //const product = await Product.getProductById(id);
-        //res.render('products/product', { product });
-    //};
+    static async getProduct(req, res) {
+        const id = req.params.id;
+        const product = await Product.findById(id).lean();
+        res.render('products/product', { product });
+    };
 
     //static async removeProduct(req, res) {
         //const id = req.params.id;
@@ -36,11 +36,11 @@ module.exports = class ProductController {
         //res.redirect('/products');
     //};
 
-    //static async editProduct(req, res) {
-        //const id = req.params.id;
-        //const product = await Product.getProductById(id);
-        //res.render('products/edit', { product });
-    //};
+    static async editProduct(req, res) {
+        const id = req.params.id;
+        const product = await Product.findById(id).lean();
+        res.render('products/edit', { product });
+    };
 
     //static async editProductPost(req, res) {
         //const id = req.body.id;
