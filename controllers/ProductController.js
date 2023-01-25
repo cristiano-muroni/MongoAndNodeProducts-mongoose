@@ -40,17 +40,18 @@ module.exports = class ProductController {
         const id = req.params.id;
         const product = await Product.findById(id).lean();
         res.render('products/edit', { product });
-    };
+    }
+    static async editProductPost(req, res) {
+        const id = req.body.id;
+        const name = req.body.name;
+        const image = req.body.image;
+        const price = req.body.price;
+        const description = req.body.description;
 
-    //static async editProductPost(req, res) {
-        //const id = req.body.id;
-        //const name = req.body.name;
-        //const image = req.body.image;
-        //const price = req.body.price;
-        //const description = req.body.description;
-        //const product = new Product(name, image, price, description);
-       // console.log(req.body)
-        //await product.updateProduct(id);
-        //res.redirect('/products');
-   // };//
+        const product = {name, image, price, description};
+
+        await Product.updateOne({ _id: id }, product);
+
+        res.redirect('/products');
+    };
 };
